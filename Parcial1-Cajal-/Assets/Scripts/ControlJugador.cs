@@ -3,6 +3,7 @@ using UnityEngine;
 public class ControlJugador : MonoBehaviour
 {
     public float rapidezDesplazamiento = 10.0f;
+   
 
     void Start()
     {
