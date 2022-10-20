@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControlJugador : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class ControlJugador : MonoBehaviour
     public TMPro.TMP_Text textoCantidadRecolectados;
     public TMPro.TMP_Text textoGanaste;
     private int cont;
+
 
     void Start()
     {
@@ -42,5 +44,13 @@ public class ControlJugador : MonoBehaviour
             setearTextos();
             other.gameObject.SetActive(false);
         }
+
+        if (other.gameObject.CompareTag("Enemigo") == true)
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+        }
     }
+
+
 }
