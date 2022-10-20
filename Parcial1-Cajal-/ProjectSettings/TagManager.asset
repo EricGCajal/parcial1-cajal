@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - coleccionable
+  - Enemigo
+  - Jugador
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - Jugador
   - Water
   - UI
-  - 
+  - Enemigo
   - 
   - 
   - 

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +9,11 @@ public class ControlJugador : MonoBehaviour
     public int rapidez;
     public TMPro.TMP_Text textoCantidadRecolectados;
     public TMPro.TMP_Text textoGanaste;
+    public TMPro.TMP_Text textoGameOver;
     private int cont;
+    GameObject Jugador;
+
+
 
 
     void Start()
@@ -15,15 +21,22 @@ public class ControlJugador : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cont = 0;
         textoGanaste.text = "";
+        textoGameOver.text = "";
         setearTextos();
+        Jugador = GameObject.Find("Jugador");
     }
 
     private void setearTextos()
     {
         textoCantidadRecolectados.text = "Cantidad recolectados: " + cont.ToString();
-        if (cont >= 5)
+        if (cont >= 1)
         {
             textoGanaste.text = "Ganaste!";
+        }
+        
+        if (other.gameObject.CompareTag("Enemigo") == true)
+        {
+            textoGameOver.text = "GAME OVER";
         }
     }
 
@@ -38,19 +51,30 @@ public class ControlJugador : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("coleccionable") == true)
+        
+
+        if (other.gameObject.CompareTag("coleccionable") == true) //Colisión con coleccionables
         {
             cont = cont + 1;
             setearTextos();
             other.gameObject.SetActive(false);
+            transform.localScale = new Vector3(3f, 3f, 3f);
+            rapidez *= 2;
+
         }
 
-        if (other.gameObject.CompareTag("Enemigo") == true)
+        if (other.gameObject.CompareTag("Enemigo") == true) //Colisión con enemigos
         {
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
         }
-    }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+
+        }
+    }
 
 }
