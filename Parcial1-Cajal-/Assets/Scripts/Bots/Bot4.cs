@@ -1,28 +1,29 @@
 using UnityEngine;
+using System.Collections;
+
 public class Bot4 : MonoBehaviour
 {
-    [SerializeField] private Vector3 pointA = new Vector3(-2, 0, 0);
-    [SerializeField] private Vector3 pointB = new Vector3(2, 0, 0);
-    [SerializeField] private float speed = 1;
-    private float t;
-    private void Update()
+    public Vector3 pointB;
+
+    IEnumerator Start()
     {
-        t += Time.deltaTime * speed;
-        // Moves the object to target position
-        transform.position = Vector3.Lerp(pointA, pointB, t);
-        // Flip the points once it has reached the target
-        if (t >= 1)
+        var pointA = transform.position;
+        while (true)
         {
-            var b = pointB;
-            var a = pointA;
-            pointA = b;
-            pointB = a;
-            t = 0;
+            yield return StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
+            yield return StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f));
         }
     }
-    // What Linear interpolation actually looks like in terms of code
-    private Vector3 CustomLerp(Vector3 a, Vector3 b, float t)
+
+    IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
     {
-        return a * (1 - t) + b * t;
+        var i = 0.0f;
+        var rate = 1.0f / time;
+        while (i < 1.0f)
+        {
+            i += Time.deltaTime * rate;
+            thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+            yield return null;
+        }
     }
 }
