@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PerseguidorEnemigo : MonoBehaviour
+public class Bot1 : MonoBehaviour
 {
 
     private GameObject jugador;

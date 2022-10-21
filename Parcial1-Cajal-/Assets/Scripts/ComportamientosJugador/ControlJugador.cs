@@ -42,7 +42,7 @@ public class ControlJugador : MonoBehaviour
     private void setearTextos()
     {
         textoCantidadRecolectados.text = "Cantidad recolectados: " + cont.ToString();
-        if (cont >= 1)
+        if (cont >= 5)
         {
             textoGanaste.text = "Ganaste!";
         }
@@ -69,7 +69,7 @@ public class ControlJugador : MonoBehaviour
             cont = cont + 1;
             setearTextos();
             other.gameObject.SetActive(false);
-            transform.localScale = new Vector3(3f, 3f, 3f);
+            transform.localScale = new Vector3(2f, 2f, 2f);
             rapidez *= 2;
 
         }

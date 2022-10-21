@@ -1,21 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Bot2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Vector3 pointB;
+
+    IEnumerator Start()
     {
-        // Moves the object forward two units.
-        transform.Translate(0, 0, 2);
+        var pointA = transform.position;
+        while (true)
+        {
+            yield return StartCoroutine(MoveObject(transform, pointA, pointB, 3.0f));
+            yield return StartCoroutine(MoveObject(transform, pointB, pointA, 3.0f));
+        }
     }
 
-    // Update is called once per frame
-    public float velocidad = 2;
-    void Update()
+    IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
     {
-        // Moves the object forward at two units per second.
-        transform.Translate(Vector3.forward * velocidad * Time.deltaTime);
+        var i = 0.0f;
+        var rate = 1.0f / time;
+        while (i < 1.0f)
+        {
+            i += Time.deltaTime * rate;
+            thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+            yield return null;
+        }
     }
 }
