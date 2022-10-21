@@ -24,6 +24,19 @@ public class ControlJugador : MonoBehaviour
         textoGameOver.text = "";
         setearTextos();
         Jugador = GameObject.Find("Jugador");
+
+
+
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.name);
+            Time.timeScale = 1;
+        }
     }
 
     private void setearTextos()
@@ -33,11 +46,7 @@ public class ControlJugador : MonoBehaviour
         {
             textoGanaste.text = "Ganaste!";
         }
-        
-        if (other.gameObject.CompareTag("Enemigo") == true)
-        {
-            textoGameOver.text = "GAME OVER";
-        }
+ 
     }
 
     private void FixedUpdate()
@@ -47,6 +56,8 @@ public class ControlJugador : MonoBehaviour
         Vector3 vectorMovimiento = new Vector3(movimientoHorizontal, 0.0f, movimientoVertical);
 
         rb.AddForce(vectorMovimiento * rapidez);
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,13 +78,7 @@ public class ControlJugador : MonoBehaviour
         {
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
-
+           
         }
     }
 

@@ -12,11 +12,13 @@ public class CaidaJugador : MonoBehaviour
 
     void Update()
     {
-        if (Jugador.transform.position.y < -5)
+        if (Jugador.transform.position.y < -5) 
         {
             Scene currentScene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(currentScene.name);
         }
+
+      
     }
 
 
